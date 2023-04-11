@@ -1,7 +1,7 @@
 
 #![allow(unused)]
 
-use std::io;
+use std::{io, vec};
 use rand::Rng;
 use std::io::{Write, BufReader, BufRead, ErrorKind};
 use std::fs::File;
@@ -9,43 +9,35 @@ use std::cmp::Ordering;
 
 fn main(){
 
+let vec1: Vec<i32> = Vec::new();
 
-let str3 = String::from("x r t b h k k a m c");
+let mut vec2:Vec<i32> = vec![1,2,3,4];
 
-let mut v1:Vec<char> = str3.chars().collect();
+vec2.push(5);
 
-v1.sort();
-v1.dedup();
+println!("1st: {}", vec2[0]);
+
+let second = &vec2[1];
 
 
-for char in v1{
-    println!("{}", char);
+match vec2.get(1) {
+    Some(second) => println!("2nd: {}", second),
+    None => println!("No second value"),
 }
 
+assert_eq!(None, vec2.get(0..6));
 
-let st4 = "Random String";
-
-let mut st5 = st4.to_string();
-
-println!("{}", st5);
-
-
-let byte_arr1 = st5.as_bytes();
-
-let st6 = &st5[0..6];
-println!("String length: {}", st6.len());
-st5.clear();
-
-
-let st6 = String::from("Just some");
-
-let st7 = String::from(" words");
-
-let st8 = st6 + &st7;
-
-for char in st8.bytes(){
-    println!("{}", char);
+for i in &mut vec2{
+    *i *=2;
 }
+
+for i in &vec2{
+    println!("{}", i);
+}
+println!("Vec Length {}", vec2.len());
+println!("Pop: {:?}", vec2.pop());
+
+
 
 }
 
