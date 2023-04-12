@@ -6,36 +6,30 @@ use rand::Rng;
 use std::io::{Write, BufReader, BufRead, ErrorKind};
 use std::fs::File;
 use std::cmp::Ordering;
+use std::ops::Add;
+use std::collections::HashMap;
+
+
 
 fn main(){
 
-let vec1: Vec<i32> = Vec::new();
-
-let mut vec2:Vec<i32> = vec![1,2,3,4];
-
-vec2.push(5);
-
-println!("1st: {}", vec2[0]);
-
-let second = &vec2[1];
+let mut heroes = HashMap::new();
+heroes.insert("Superman", "Clark Kent");
+heroes.insert("Batman", "Bruce Wayne");
+heroes.insert("The Flash", "Barry Allen");
 
 
-match vec2.get(1) {
-    Some(second) => println!("2nd: {}", second),
-    None => println!("No second value"),
+for (k,v) in heroes.iter(){
+    println!("{} = {}", k, v);
 }
 
-assert_eq!(None, vec2.get(0..6));
-
-for i in &mut vec2{
-    *i *=2;
+if heroes.contains_key(&"Batman"){
+    let the_batman = heroes.get(&"Batman");
+    match the_batman{
+        Some(x) => println!("Batman is a hero"),
+        None => println!("Batman is not a hero")
+    }
 }
-
-for i in &vec2{
-    println!("{}", i);
-}
-println!("Vec Length {}", vec2.len());
-println!("Pop: {:?}", vec2.pop());
 
 
 
