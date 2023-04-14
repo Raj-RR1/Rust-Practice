@@ -1,6 +1,7 @@
 
 #![allow(unused)]
 
+//use std::f32::consts::PI;
 use std::{io, vec};
 use rand::Rng;
 use std::io::{Write, BufReader, BufRead, ErrorKind};
@@ -13,23 +14,48 @@ use std::collections::HashMap;
 
 fn main(){
 
-let mut heroes = HashMap::new();
-heroes.insert("Superman", "Clark Kent");
-heroes.insert("Batman", "Bruce Wayne");
-heroes.insert("The Flash", "Barry Allen");
 
+const PI: f32 = 3.141592;
 
-for (k,v) in heroes.iter(){
-    println!("{} = {}", k, v);
+trait Shape {
+    fn new(length: f32, width: f32) -> Self;
+    fn area(&self) -> f32;
 }
 
-if heroes.contains_key(&"Batman"){
-    let the_batman = heroes.get(&"Batman");
-    match the_batman{
-        Some(x) => println!("Batman is a hero"),
-        None => println!("Batman is not a hero")
+struct Rectangle {length: f32, width: f32};
+
+struct Circle {length: f32, width: f32};
+
+impl Shape for Rectangle{
+    fn new(length: f32, width: f32) -> Rectangle{
+        return Rectangle{length, width};
+    }
+
+    fn area(&self) -> f32 {
+        return  self.length * self.width;
     }
 }
+
+impl  Shape for Circle{
+    fn new(length: f32, width: f32) -> Circle{
+        return Circle{length, width};
+    }
+
+    fn area(&self) -> f32 {
+        return  (self.length/ 2.0).powf(2.0) * PI;
+    }
+}
+
+
+let rec: Rectangle = Shape::new(10.0, 10.0);
+
+let circ: Circle = Shape::new(10.0, 10.0);
+
+println!("Rec Area: {}", rec.area());
+println!("Circ Area: {}", circ.area());
+
+
+
 
 
 
